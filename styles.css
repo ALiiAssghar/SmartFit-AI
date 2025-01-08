@@ -1,0 +1,94 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffe6e9; /* Soft pink background */
+    color: #7a0b24; /* Deep red text */
+}
+
+/* Header Styles */
+header {
+    background-color: #ff5f75; /* Vibrant pink */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Main Container */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ffccd5; /* Light pink border */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+form {
+    margin-top: 20px;
+}
+
+form label {
+    font-size: 18px;
+    color: #7a0b24;
+    font-weight: bold;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #ffccd5; /* Light pink border */
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Buttons */
+button {
+    background-color: #ff5f75; /* Vibrant pink */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #e14a62; /* Slightly darker pink */
+}
+
+/* Workout Plan Section */
+.workout-plan {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffe6e9; /* Soft pink background */
+    border: 1px solid #ffccd5; /* Light pink border */
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.workout-plan h3 {
+    color: #7a0b24;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #7a0b24; /* Deep red */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+}

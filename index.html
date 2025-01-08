@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFit AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to SmartFit AI</h1>
+    </header>
+
+    <main>
+        <div id="welcome-screen">
+            <h2>Enter Your Personal Information</h2>
+            <form id="user-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id="exercise-screen" style="display: none;">
+            <h2>Personalized Exercise Plan</h2>
+            <p id="personal-info"></p>
+            <label for="level">Select Fitness Level:</label>
+            <select id="level">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+            <button id="get-plan">Get Plan</button>
+            <div id="plan-result"></div>
+            <button id="logout">Logout</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>Contact us at: <a href="mailto:me623382@gmail.com">me623382@gmail.com</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('user-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const age = document.getElementById('age').value;
+
+            if (name && email && age) {
+                document.getElementById('personal-info').textContent = `Welcome, ${name} (${email}, Age: ${age}).`;
+                document.getElementById('welcome-screen').style.display = 'none';
+                document.getElementById('exercise-screen').style.display = 'block';
+            } else {
+                alert('Please fill out all fields!');
+            }
+        });
+
+        document.getElementById('get-plan').addEventListener('click', function () {
+            const level = document.getElementById('level').value;
+
+            fetch('http://127.0.0.1:5000/recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ level }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('plan-result').textContent = `Error: ${data.error}`;
+                } else {
+                    const exercises = data.workout_plan.map((exercise, index) => `${index + 1}. ${exercise}`).join('<br>');
+                    document.getElementById('plan-result').innerHTML = `
+                        <h3>Recommended Exercises (${level.charAt(0).toUpperCase() + level.slice(1)}):</h3>
+                        ${exercises}
+                    `;
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching exercise plan:', err);
+                document.getElementById('plan-result').textContent = 'Failed to fetch exercise plan. Please try again later.';
+            });
+        });
+
+        document.getElementById('logout').addEventListener('click', function () {
+            document.getElementById('user-form').reset();
+            document.getElementById('welcome-screen').style.display = 'block';
+            document.getElementById('exercise-screen').style.display = 'none';
+            document.getElementById('plan-result').textContent = '';
+        });
+    </script>
+</body>
+</html>
